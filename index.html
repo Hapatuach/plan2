@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<p>Click the button to convert the array into a String.</p>
+ 
+<button onclick="myFunction()">Try it</button>
+<p id="demo"></p>
+<script>
+function myFunction() {
+  var planner = 
+  [{day:"א",hour:"1",room:"202",shem:"more 1 " ,course:"Banana"},
+  
+   {day:"א",hour:"2",room:"102",shem:"more 2 " ,course:"Course X"},
+   {day:"א",hour:"2",room:"108",shem:"morex 2 " ,course:"Course 2x"},
+   {day:"ב",hour:"1",room:"101",shem:"more 2 " ,course:"Course X"},
+   {day:"ב",hour:"2",room:"101",shem:"more 3 " ,course:"Course Y"},
+   {day:"ב",hour:"3",room:"221",shem:"more 4 " ,course:"Course X"},
+   {day:"ג",hour:"1",room:"222",shem:"more 1 " ,course:"Course t"},
+   {day:"ג",hour:"2",room:"227",shem:"more 4 " ,course:"Course X"},
+   {day:"ד",hour:"1",room:"2244",shem:"more 1 " ,course:"Course X"},
+   {day:"ה",hour:"1",room:"2621",shem:"more 4 " ,course:"Course X"},
+   {day:"ו",hour:"1",room:"111",shem:"more 2 " ,course:"Course t"},
+   {day:"ו",hour:"2",room:"77",shem:"more 3 " ,course:"Course X"},
+   {day:"ו",hour:"4",room:"221",shem:"more 4 " ,course:"Course X"}
+   
+  ];
+//  planner.toString();
+  
+   rearrangeTab(planner);
+   displayvalues(planner);
+  
+}
+function displayvalues(v) {
+   
+ 
+   
+   var str ="";
+   var len = v.length;
+   alert ("len= " + len   );
+   
+   for (var i = 0; i < len; i++)
+   {
+      str = str +  v[i].day + " " + v[i].hour +" "  + v[i].room +  "<br>" ;
+   
+  }
+  
+ // alert (str);
+  document.getElementById("demo").innerHTML = str;
+}
+function rearrangeTab(v) {
+    var len = v.length;
+    var str ="";
+    var HoursPerWeek = [];
+    var maxHoursPerWeek = 0;
+    var   maxHours = 0;
+   
+   alert ("len= " + len   );
+   
+   for (var i = 0; i < len; i++)
+   
+   {
+   
+   switch (v[i].day) {
+ case "א":
+    day = 1;
+    break;
+  case "ב":
+    day = 2;
+    break;
+  case "ג":
+     day = 3;
+    break;
+  case "ד":
+    day = 4;
+    break;
+  case "ה":
+    day = 5;
+    break;
+  case "ו":
+    day = 6;
+    break;
+  case "ש":
+    day = 7;
+    }
+      str = str + day + " " + v[i].hour +" "  + v[i].room +  "<br>" ;
+      HoursPerWeek [i] = v[i].hour;
+      v[i].day = day;
+   
+  }
+  
+   alert (str);
+   maxHoursPerWeek = (Math.max(...HoursPerWeek));
+   alert("max hrs = "  +  maxHoursPerWeek);
+  
+   
+    var daysInx = Create2DArray(maxHoursPerWeek+1,6); 
+    
+    for (var i = 0; i < maxHoursPerWeek+1   ; i++){   
+        		for (var j = 0; j < 7; j++)
+            {
+               daysInx [i][j]  = 0  ;
+   	   		}
+         }
+    
+   // alert ("rrr=" + daysInx [1][6]); 
+    
+    for (var i = 0; i < len; i++)
+      {
+  
+         var row = v[i].hour;
+         var col = v[i].day;
+         daysInx [row][col] ++; 
+         
+   //   alert("row:" + row + "col:" + col + daysInx [row][col]);
+   
+  }
+     maxelemnts = (Math.max(...daysInx[1]));
+     alert ("zz=" +daysInx );
+     alert("daysInx len = " + daysInx.length);
+     alert("dayInddex len 2 " + daysInx[0].length );
+     alert ("me=" + maxelemnts );
+     
+     
+     var maxPerHour = [];
+     var st  =  " " ;
+     
+        for (var i = 0; i < maxHoursPerWeek +1 ; i++)
+      {
+  
+         var max = (Math.max(...daysInx[i]));
+         
+         if (max == 0 ) 
+         {
+         	max = 1 }
+         
+ 
+         maxPerHour[i] = max ;
+         
+         maxHours = maxHours + max;
+         st = st +" "  +  maxPerHour[i]+ " inx=" + i ; 
+          
+       
+  }
+ 
+  alert("max:" + st );
+  alert("max:   " + maxHours );
+  
+  var maxInTable = (Math.max(...maxPerHour)) ;
+   alert("max table :" + maxInTable );
+  
+   var FinalMatrix  = Create2DArray(maxHours,6); 
+   
+     for (var i = 0; i < maxHours   ; i++){   
+        		for (var j = 0; j < 7; j++)
+            {
+                FinalMatrix [i][j]  = 0  ;
+   	   		}
+         }
+         
+         
+    alert ("fnlz=" +FinalMatrix );
+     alert("daysInx len = " + FinalMatrix.length); 
+     alert ("max efes = " + maxPerHour [0]);
+    var nextRow = 0; 
+    if (maxPerHour [0] == 0 )
+    {
+        nextRow = 1 ;
+       } 
+    
+    for (var i = 0; i < len; i++)
+      {
+  
+          var row = v[i].hour;
+         var col = v[i].day;
+          var row2 = CheckNextRow(row,col,FinalMatrix,maxHours); 
+         FinalMatrix [row][col] = i; 
+         
+         
+     alert("FINAL--" + "row: " + row + "col: " + col + "inx "+ FinalMatrix [row][col]);
+   
+  }
+     
+     alert ("sium=" +FinalMatrix ); 
+   
+ 
+}
+function Create2DArray(rows,columns) {
+   var x = new Array(rows);
+   for (var i = 0; i < rows; i++) {
+       x[i] = new Array(columns);
+   }
+   return x;
+ }  
+   
+    function CheckNextRow(row,col,FinalMatrix,maxHours)
+    {
+       var rtRow = row;
+       for (var i = row ; i < maxHours; i++) 
+       {
+          rtRow = i; 
+          alert ("rtrow = " +i + "erech= " + FinalMatrix[i][col]);
+          if (FinalMatrix[i][col] == 0)
+         	{break;}
+        }
+    return rtRow;
+    }
+  
+</script>
+</body>
+</html>
+
