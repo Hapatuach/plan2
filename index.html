@@ -1,39 +1,100 @@
-
 <!DOCTYPE html>
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<style>
+
+#myInput {
+  //background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+table {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+}
+
+th, td {
+  text-align: center;
+  padding: 12px;
+}
+
+ tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd; 
+}
+
+//tr:nth-child(even){background-color: #e2f2f2}
+
+th {
+  background-color: #000080;
+  color: white;
+}
+table tr.header, table tr:hover {
+  /* Add a grey background color to the table header and on hover */
+  background-color: #f1f1f1;
+}
+
+</style>
+</head>
+
 <body>
-<p>Click the button to convert the array into a String.</p>
+
+<h1 align="center"> מערכת שעות חטיבתית </h1>
+
+<input type="text" id="myInput" onkeyup="mySearch()" placeholder="          ...חפש שיעור " title="Type in a name">
+
  
-<button onclick="myFunction()">Try it</button>
 <p id="demo"></p>
 <script>
-function myFunction() {
+   
+  var maxPerHour = [];
+  var startRow = [];
+      startRow [0] = 0;
+      
   var planner = 
-  [{day:"א",hour:"1",room:"202",shem:"more 1 " ,course:"Banana"},
+  [{day:"א",hour:"1",room:"202",shem:"איתי" ,course:"חשבון"},
   
-   {day:"א",hour:"2",room:"102",shem:"more 2 " ,course:"Course X"},
-   {day:"א",hour:"2",room:"108",shem:"morex 2 " ,course:"Course 2x"},
-   {day:"ב",hour:"1",room:"101",shem:"more 2 " ,course:"Course X"},
-   {day:"ב",hour:"2",room:"101",shem:"more 3 " ,course:"Course Y"},
-   {day:"ב",hour:"3",room:"221",shem:"more 4 " ,course:"Course X"},
-   {day:"ג",hour:"1",room:"222",shem:"more 1 " ,course:"Course t"},
-   {day:"ג",hour:"2",room:"227",shem:"more 4 " ,course:"Course X"},
-   {day:"ד",hour:"1",room:"2244",shem:"more 1 " ,course:"Course X"},
-   {day:"ה",hour:"1",room:"2621",shem:"more 4 " ,course:"Course X"},
-   {day:"ו",hour:"1",room:"111",shem:"more 2 " ,course:"Course t"},
-   {day:"ו",hour:"2",room:"77",shem:"more 3 " ,course:"Course X"},
-   {day:"ו",hour:"4",room:"221",shem:"more 4 " ,course:"Course X"}
+  {day:"א",hour:"1",room:"כיתת מוזיקה",shem:"שחר" ,course:"מוזיקה"},
+   {day:"א",hour:"2",room:"102",shem:"טובי" ,course:"אנגלית"},
+   {day:"א",hour:"2",room:"108",shem:"מיכל" ,course:"עיברית"},
+   {day:"א",hour:"2",room:"188",shem:"אלון" ,course:"חונכות"},
+   
+   {day:"ב",hour:"1",room:"101",shem:"more 2 " ,course:"וועדות"},
+   {day:"ב",hour:"1",room:"111",shem:"שי" ,course:"נגרות"},
+   
+   {day:"ב",hour:"1",room:"888",shem:"גל" ,course:"חלל"},
+   {day:"ב",hour:"2",room:"221",shem:"רינה" ,course:"מחול"},
+   {day:"ג",hour:"1",room:"222",shem:"תלמיד" ,course:"ספרדית"},
+   {day:"ג",hour:"2",room:"מגרש ספורט",shem:"מורה לספורט" ,course:"דרמה"},
+   {day:"ד",hour:"1",room:"2244",shem:"אלון " ,course:"חונכות"},
+   {day:"ה",hour:"1",room:"2621",shem:"שי" ,course:"מרכז תיקונים"},
+   {day:"ו",hour:"1",room:"111",shem:"איילן " ,course:"חשבון"},
+   {day:"ו",hour:"2",room:"מגרש ספורט",shem:"מורה לספורט " ,course:"ספורט"},
+   {day:"ו",hour:"4",room:"221",shem:"טובי" ,course:"אנגלית"}
    
   ];
-//  planner.toString();
+  
+function myFunction() {
+
+
   
    rearrangeTab(planner);
-   displayvalues(planner);
+ //  displayvalues(planner);
+   createTable(tableData);
   
 }
 function displayvalues(v) {
-   
- 
    
    var str ="";
    var len = v.length;
@@ -122,23 +183,33 @@ function rearrangeTab(v) {
      alert ("me=" + maxelemnts );
      
      
-     var maxPerHour = [];
+   
+     var rowCount = 0 ;
+     
      var st  =  " " ;
      
         for (var i = 0; i < maxHoursPerWeek +1 ; i++)
       {
   
          var max = (Math.max(...daysInx[i]));
-         
+          
          if (max == 0 ) 
-         {
-         	max = 1 }
+            {rowCount = 1;}
+         else
+            {rowCount = max;}
          
+         alert ("maxHours " + maxHours + "rowCount :" + rowCount  + "\n")
  
          maxPerHour[i] = max ;
          
-         maxHours = maxHours + max;
-         st = st +" "  +  maxPerHour[i]+ " inx=" + i ; 
+          if (i> 0 )
+          {
+          startRow[i] = maxHours     ;}
+          
+         maxHours = maxHours + rowCount;
+         
+       
+         st = st +" "  +  maxPerHour[i]+ " inx=" + i  + " startrow" + startRow[i] + "\n" ; 
           
        
   }
@@ -147,14 +218,17 @@ function rearrangeTab(v) {
   alert("max:   " + maxHours );
   
   var maxInTable = (Math.max(...maxPerHour)) ;
-   alert("max table :" + maxInTable );
+ //  alert("max table :" + maxInTable );
   
+  
+  // Final Matrix to build HTML Table in the right order 
+  //------------------------------------------------------------
    var FinalMatrix  = Create2DArray(maxHours,6); 
    
      for (var i = 0; i < maxHours   ; i++){   
         		for (var j = 0; j < 7; j++)
             {
-                FinalMatrix [i][j]  = 0  ;
+                FinalMatrix [i][j]  = -999  ;
    	   		}
          }
          
@@ -162,26 +236,70 @@ function rearrangeTab(v) {
     alert ("fnlz=" +FinalMatrix );
      alert("daysInx len = " + FinalMatrix.length); 
      alert ("max efes = " + maxPerHour [0]);
-    var nextRow = 0; 
-    if (maxPerHour [0] == 0 )
-    {
-        nextRow = 1 ;
-       } 
-    
+  
     for (var i = 0; i < len; i++)
       {
   
-          var row = v[i].hour;
-         var col = v[i].day;
-          var row2 = CheckNextRow(row,col,FinalMatrix,maxHours); 
-         FinalMatrix [row][col] = i; 
+          var row = startRow[v[i].hour];
+           
+         // change order to set days from right to left(FRIDAY FIRST SUNDAY LAST)
+         var col = 6 - v[i].day  ;
+         var finalRow = CheckNextRow(row,col,FinalMatrix,maxHours); 
+         FinalMatrix [finalRow][col] = i; 
          
          
-     alert("FINAL--" + "row: " + row + "col: " + col + "inx "+ FinalMatrix [row][col]);
+ //    alert("FINAL--" + "row: " + row2 + "col: " + col + "inx "+ FinalMatrix [row2][col]);
    
   }
      
      alert ("sium=" +FinalMatrix ); 
+      alert ("before = " +FinalMatrix [0][0] + " +1 " + +FinalMatrix[1][5]);
+     
+    // Set Headres for Hours per day
+      
+    var rowInx = 0 ;  
+    
+    for (var i = 0; i < maxHoursPerWeek +1    ; i++)
+      {
+       
+       					
+                     rowInx = startRow [i];   
+             	     FinalMatrix [rowInx][6] =  -1*i ;
+                     alert ("i - " + i +   " + " +" rowInx - " + rowInx + "mat : "+ FinalMatrix [i][6] + "maxHoursPerWeek :" + maxHoursPerWeek + "startRowstartRow.len = " + startRow.length + " FinalMatrix len : " + FinalMatrix [0].length );
+         }
+    /*     
+         var e1 =  FinalMatrix [1][6];
+         
+         for (var i = 1; i < maxHours   ; i++)
+         {   
+        	
+                if (FinalMatrix [i][6]  == -999 )
+                { FinalMatrix [i][6] = e1 *100 ;
+                								}
+                else
+                  {e1 = FinalMatrix [i][6] ; } 
+   	   	
+         }
+     */
+     
+     // Set Headres for Days in Week 
+     FinalMatrix [0][0] = "ו";
+     FinalMatrix [0][1] = "ה";
+     FinalMatrix [0][2] = "ד";
+     FinalMatrix [0][3] = "ג";
+     FinalMatrix [0][4] = "ב";
+     FinalMatrix [0][5] = "א";
+     FinalMatrix [0][6] = "  שעה " + " / " + "יום";
+
+   //      
+   //      alert ("i- " + i +   " + " + rowInx - " + rowInx + "tt-"+ FinalMatrix [i][6]);
+   //       
+   //    }
+      
+      
+      alert ("before html =" +FinalMatrix );
+      alert ("after = " +FinalMatrix [0][0] + " +1 " + +FinalMatrix[1][5]); 
+     createTable(FinalMatrix);
    
  
 }
@@ -199,13 +317,238 @@ function Create2DArray(rows,columns) {
        for (var i = row ; i < maxHours; i++) 
        {
           rtRow = i; 
-          alert ("rtrow = " +i + "erech= " + FinalMatrix[i][col]);
-          if (FinalMatrix[i][col] == 0)
+         // alert ("rtrow = " +i + "erech= " + FinalMatrix[i][col]);
+          if (FinalMatrix[i][col] == -999)
          	{break;}
         }
     return rtRow;
     }
+    
+    
+  // build HTML table data from an array (one or two dimensional)
+ 
+ 
+ function createTable(tableData) {
   
+  var table = document.createElement("table");
+    table.setAttribute("id", "table");
+ // document.body.appendChild(x);
+  var header = document.createElement("tr");
+  // get first row to be header
+  var headers = tableData[0];
+
+  // create table header
+  headers.forEach(function(rowHeader){
+    var th = document.createElement("th");
+    th.appendChild(document.createTextNode(rowHeader));
+    header.appendChild(th);
+  });      
+  console.log(headers);
+
+  // insert table header 
+  table.append(header);
+  var row = {};
+  var cell = {};
+
+  // remove first how - header
+  tableData.shift();
+  tableData.forEach(function(rowData, index) {
+    row = table.insertRow();
+    console.log("indice: " + index);
+    rowData.forEach(function(cellData) {
+      cell = row.insertCell();
+      
+      if (cellData > -1)
+      {
+         cell.textContent = planner[cellData].course;
+             
+         cell.onclick = function () {
+              tableText(this,cellData);}   
+            }
+      else
+      {
+      	 if (cellData == -999)
+            { 
+             cell.textContent = "    ";}
+         else
+         {
+         
+         	cell.textContent = cellData ;            }
+            }
+            
+            
+             
+    switch (cellData) {
+         case -1:
+            cell.style.backgroundColor = "#ff66ff";
+            break;
+          case -2:
+            cell.style.backgroundColor = "#ff4d4d";
+            break;
+  		  case -3:
+            cell.style.backgroundColor = "#ffd1b3";
+            break;
+          case -4:
+            cell.style.backgroundColor = "#ff9999";
+            break;
+          case -5:
+            cell.style.backgroundColor = "#ff9999";
+            break;      
+          case -6:
+            cell.style.backgroundColor = "#ffb380";
+            break;  
+          case -7:
+            cell.style.backgroundColor = "#ff4d4d";
+            break;
+          case -8:
+            cell.style.backgroundColor = "#ffcce6";
+            break; 
+         case -9:
+            cell.style.backgroundColor = "#ff66ff";
+            break;   
+         case -10:
+            cell.style.backgroundColor = "#ffe6f2";
+            break;   
+            }
+  
+    });
+  });
+  document.body.appendChild(table);
+}
+// end of function
+
+  function tableText(tableCell,inx)
+  {
+  
+    var str =  
+        'פרטי השיעור\n\n' 
+    +  " שם מורה " + " : " +  planner[inx].shem +  "\n\n" 
+    +   " תוכן השיעור " + " : " + planner[inx].course +    "\n\n"
+    +  " כיתה " +  " : "  + planner[inx].room  ;
+   
+    alert ( str);
+   
+    
+  }     
+  
+  function mySearch()
+  {
+  var input, filter, table, tr, td, i, txtValue;
+  
+  
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table");
+  tr = table.getElementsByTagName("tr");
+  th = table.getElementsByTagName("th");
+ 
+  var j = 0;
+  var loop = true;
+  
+  for (i = 0; i < tr.length; i++) {
+   var j = 0;
+   var loop = true;
+   
+   while (loop) { 
+  	    
+    td = tr[i].getElementsByTagName("td")[j];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        loop = false;
+      } else {
+        tr[i].style.display = "none";
+      }  //  end else
+    } // end if td
+        
+       j++; 
+       if ( j ==  th.length)
+          {loop = false;}
+          
+     } // end while 
+  } // end for 
+}
+    
+</script>
+
+	<script type="text/javascript">
+		// Client ID and API key from the Developer Console
+		var API_KEY = 'AIzaSyBYDYxPD166O3ugiKn_kBV-9fXJf0aeq20';
+		// Empty clientId
+		CLIENT_ID = "";
+		// Array of API discovery doc URLs for APIs used by the quickstart
+		var DISCOVERY_DOCS = [ "https://sheets.googleapis.com/$discovery/rest?version=v4" ];
+		// Authorization scopes required by the API; multiple scopes can be
+		// included, separated by spaces.
+		var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+		/**
+		 *  On load, called to load the auth2 library and API client library.
+		 */
+		function handleClientLoad() {
+			gapi.load('client:auth2', initClient);
+		}
+		/**
+		 *  Initializes the API client library and sets up sign-in state
+		 *  listeners.
+		 */
+		function initClient() {
+			gapi.client
+					.init({
+						apiKey : API_KEY,
+						clientId : CLIENT_ID,
+						discoveryDocs : DISCOVERY_DOCS,
+						scope : SCOPES
+					})
+					.then(
+							function() {
+								console
+										.log("init gapi completes, start read data from spreadsheet");
+								listMajors();
+							}, function(error) {
+								appendPre(JSON.stringify(error, null, 2));
+							});
+		}
+		/**
+		 * Append a pre element to the body containing the given message
+		 * as its text node. Used to display the results of the API call.
+		 *
+		 * @param {string} message Text to be placed in pre element.
+		 */
+		function appendPre(message) {
+			var pre = document.getElementById('content');
+			var textContent = document.createTextNode(message + '\n');
+			pre.appendChild(textContent);
+		}
+		/**
+		 * Print the names and majors of students in a sample spreadsheet:
+		 * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+		 */
+		function listMajors() {
+			gapi.client.sheets.spreadsheets.values.get({
+				spreadsheetId : '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+				range : 'Class Data!A2:E',
+			}).then(function(response) {
+				var range = response.result;
+				if (range.values.length > 0) {
+					appendPre('Name, Major:');
+					for (i = 0; i < range.values.length; i++) {
+						var row = range.values[i];
+						// Print columns A and E, which correspond to indices 0 and 4.
+						appendPre(row[0] + ', ' + row[4]);
+					}
+				} else {
+					appendPre('No data found.');
+				}
+			}, function(response) {
+				appendPre('Error: ' + response.result.error.message);
+			});
+		}
+	</script>
+<script async defer src="https://apis.google.com/js/api.js"
+		onload="handleClientLoad()"
+		onreadystatechange="if (this.readyState === 'complete') this.onload()">
+		
 </script>
 </body>
 </html>
