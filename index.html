@@ -534,7 +534,7 @@ function listMajors()
 	alert("list majors");
 	gapi.client.sheets.spreadsheets.values.get({
 		spreadsheetId : '1UyDq6sWoi67vaUxLRf2c2dUxy3HVYWYU8O8g1huqt4U',
-		range : 'Class Data!A2:E',
+		range : 'Sheet1!A2:E',
 	}).then(function(response) {
 		var range = response.result;
 		if (range.values.length > 0) {
