@@ -521,12 +521,13 @@ function listMajors()
 		range : 'Sheet1!A2:E',
 	}).then(function(response) {
 		var range = response.result;
-		planner =  response.result;
-		alert ("planer = " + planner);
+		 
+		
 		if (range.values.length > 0) {
 			appendPre('Name, Major:');
-			for (i = 0; i < planner.length; i++) {
-				var row = range[i];
+			for (i = 0; i <range.values.length; i++) {
+				var row = range.values[i];
+				planner[i] = row;
 				// Print columns A and E, which correspond to indices 0 and 4.
 				appendPre(row[0] + ', ' + row[4]);
 			}
@@ -536,6 +537,8 @@ function listMajors()
 	}, function(response) {
 		appendPre('Error: ' + response.result.error.message);
 	});
+	
+	alert ("planer = " + planner);
  }
 </script>
 
