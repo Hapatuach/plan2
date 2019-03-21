@@ -5,7 +5,6 @@
 
 
 <style>
-
 #myInput {
   //background-image: url('/css/searchicon.png');
   background-position: 10px 10px;
@@ -16,26 +15,21 @@
   border: 1px solid #ddd;
   margin-bottom: 12px;
 }
-
 table {
   border-collapse: collapse; /* Collapse borders */
   width: 100%; /* Full-width */
   border: 1px solid #ddd; /* Add a grey border */
   font-size: 18px; /* Increase font-size */
 }
-
 th, td {
   text-align: center;
   padding: 12px;
 }
-
  tr {
   /* Add a bottom border to all table rows */
   border-bottom: 1px solid #ddd; 
 }
-
 //tr:nth-child(even){background-color: #e2f2f2}
-
 th {
   background-color: #000080;
   color: white;
@@ -44,7 +38,6 @@ table tr.header, table tr:hover {
   /* Add a grey background color to the table header and on hover */
   background-color: #f1f1f1;
 }
-
 </style>
 </head>
 
@@ -73,16 +66,37 @@ table tr.header, table tr:hover {
   var maxPerHour = [];
   var startRow = [];
       startRow [0] = 0;
-  var planner [];       // Main Table we Manipulate 
+      
+  var planner = 
+  [{day:"א",hour:"1",room:"202",shem:"איתי" ,course:"חשבון"},
   
-function manageResults()
-{
-
+  {day:"א",hour:"1",room:"כיתת מוזיקה",shem:"שחר" ,course:"מוזיקה"},
+   {day:"א",hour:"2",room:"102",shem:"טובי" ,course:"אנגלית"},
+   {day:"א",hour:"2",room:"108",shem:"מיכל" ,course:"עיברית"},
+   {day:"א",hour:"2",room:"188",shem:"אלון" ,course:"חונכות"},
+   
+   {day:"ב",hour:"1",room:"101",shem:"more 2 " ,course:"וועדות"},
+   {day:"ב",hour:"1",room:"111",shem:"שי" ,course:"נגרות"},
+   
+   {day:"ב",hour:"1",room:"888",shem:"גל" ,course:"חלל"},
+   {day:"ב",hour:"2",room:"221",shem:"רינה" ,course:"מחול"},
+   {day:"ג",hour:"1",room:"222",shem:"תלמיד" ,course:"ספרדית"},
+   {day:"ג",hour:"2",room:"מגרש ספורט",shem:"מורה לספורט" ,course:"דרמה"},
+   {day:"ד",hour:"1",room:"2244",shem:"אלון " ,course:"חונכות"},
+   {day:"ה",hour:"1",room:"2621",shem:"שי" ,course:"מרכז תיקונים"},
+   {day:"ו",hour:"1",room:"111",shem:"איילן " ,course:"חשבון"},
+   {day:"ו",hour:"2",room:"מגרש ספורט",shem:"מורה לספורט " ,course:"ספורט"},
+   {day:"ו",hour:"4",room:"221",shem:"טובי" ,course:"אנגלית"}
+   
+  ];
+  
+function myFunction() {
+  
    rearrangeTab(planner);
+ //  displayvalues(planner);
    createTable(tableData);
   
 }
-
 function displayvalues(v) {
    
    var str ="";
@@ -91,11 +105,11 @@ function displayvalues(v) {
    
    for (var i = 0; i < len; i++)
    {
-      str = str +  v[0]+ " " + v[1]+" "  + v[2] +  "<br>" ;
+      str = str +  v[i].day + " " + v[i].hour +" "  + v[i].room +  "<br>" ;
    
   }
   
-   alert (str);
+ // alert (str);
   document.getElementById("demo").innerHTML = str;
 }
 function rearrangeTab(v) {
@@ -279,7 +293,6 @@ function rearrangeTab(v) {
      FinalMatrix [0][4] = "ב";
      FinalMatrix [0][5] = "א";
      FinalMatrix [0][6] = "  שעה " + " / " + "יום";
-
    //      
    //      alert ("i- " + i +   " + " + rowInx - " + rowInx + "tt-"+ FinalMatrix [i][6]);
    //       
@@ -325,7 +338,6 @@ function Create2DArray(rows,columns) {
   var header = document.createElement("tr");
   // get first row to be header
   var headers = tableData[0];
-
   // create table header
   headers.forEach(function(rowHeader){
     var th = document.createElement("th");
@@ -333,12 +345,10 @@ function Create2DArray(rows,columns) {
     header.appendChild(th);
   });      
   console.log(headers);
-
   // insert table header 
   table.append(header);
   var row = {};
   var cell = {};
-
   // remove first how - header
   tableData.shift();
   tableData.forEach(function(rowData, index) {
@@ -405,7 +415,6 @@ function Create2DArray(rows,columns) {
   document.body.appendChild(table);
 }
 // end of function
-
   function tableText(tableCell,inx)
   {
   
@@ -458,11 +467,9 @@ function Create2DArray(rows,columns) {
      } // end while 
   } // end for 
 }
-
 //----------------------------------------------------------------------------------//
 //   READ FROM GOOGLE SPREADSHEET                                                   //
 //----------------------------------------------------------------------------------//
-
 function handleClientLoad()
 {
          alert("handleclient");		
@@ -514,16 +521,13 @@ function listMajors()
 		range : 'Sheet1!A2:E',
 	}).then(function(response) {
 		var range = response.result;
-        planner = response.result;
-        displayvalues(planner);
-         
+		planner =  response.result;
 		if (range.values.length > 0) {
 			appendPre('Name, Major:');
-			for (i = 0; i < range.values.length; i++) {
-				var row = range.values[i];
+			for (i = 0; i < planner.length; i++) {
+				var row = range[i];
 				// Print columns A and E, which correspond to indices 0 and 4.
 				appendPre(row[0] + ', ' + row[4]);
-                
 			}
 		} else {
 			appendPre('No data found.');
