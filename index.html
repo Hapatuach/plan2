@@ -522,6 +522,7 @@ function listMajors()
 	}).then(function(response) {
 		var range = response.result;
 		planner =  response.result;
+		alert ("planer = " + planner);
 		if (range.values.length > 0) {
 			appendPre('Name, Major:');
 			for (i = 0; i < planner.length; i++) {
