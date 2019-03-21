@@ -527,10 +527,12 @@ function listMajors()
 		
 		if (range.values.length > 0) {
 			appendPre('Name, Major:');
+			planner  = Create2DArray(range.values.length,11); 
+			
 			for (i = 0; i <range.values.length; i++) {
 				var row = range.values[i];
-				//planner[i][0] = row[0];
-				//planner[i][1] = row[1];
+				planner[i][0] = row[0];
+				planner[i][1] = row[1];
 				
 				
 				// Print columns A and E, which correspond to indices 0 and 4.
