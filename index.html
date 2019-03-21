@@ -520,7 +520,7 @@ function listMajors()
 	alert("list majors");
 	gapi.client.sheets.spreadsheets.values.get({
 		spreadsheetId : '1UyDq6sWoi67vaUxLRf2c2dUxy3HVYWYU8O8g1huqt4U',
-		range : 'Sheet1!A2:E',
+		range : 'Sheet1!A2:K',
 	}).then(function(response) {
 		var range = response.result;
 		 
@@ -546,7 +546,7 @@ function listMajors()
 				
 				
 				// Print columns A and E, which correspond to indices 0 and 4.
-				appendPre(row[0] + ', ' + row[1] + row[2] + ', ' + row[3] +' ' + planner[i][9]);
+				appendPre(row[0] + ', ' + row[1] + row[2] + ', ' + row[3] +' ' + planner[i][4]);
 				
 			}
 		} else {
