@@ -106,7 +106,8 @@ function displayvalues(v) {
    
    for (var i = 0; i < len; i++)
    {
-      str = str +  v[0] + " " + v[1] +" "  + v[2] +  "<br>" ;
+      var row = v.values[i];
+      str = str +  row[0] + " " + row[1] +" "  + row[2] +  "<br>" ;
    
   }
   
@@ -531,6 +532,7 @@ function listMajors()
 				planner[i] = row;
 				// Print columns A and E, which correspond to indices 0 and 4.
 				appendPre(row[0] + ', ' + row[4]);
+				
 			}
 		} else {
 			appendPre('No data found.');
@@ -539,8 +541,8 @@ function listMajors()
 		appendPre('Error: ' + response.result.error.message);
 	});
 	
-	alert ("planer 0 = " + planner[0]);
-	displayvalues(planner);
+	alert ("planer 01 = " + planner[0]);
+	displayvalues(range);
  }
 </script>
 
