@@ -67,7 +67,8 @@ table tr.header, table tr:hover {
   var startRow = [];
       startRow [0] = 0;
       
-  var planner = 
+  var planner = [];
+/*	 
   [{day:"א",hour:"1",room:"202",shem:"איתי" ,course:"חשבון"},
   
   {day:"א",hour:"1",room:"כיתת מוזיקה",shem:"שחר" ,course:"מוזיקה"},
@@ -89,7 +90,7 @@ table tr.header, table tr:hover {
    {day:"ו",hour:"4",room:"221",shem:"טובי" ,course:"אנגלית"}
    
   ];
-  
+  */
 function myFunction() {
   
    rearrangeTab(planner);
@@ -538,7 +539,7 @@ function listMajors()
 		appendPre('Error: ' + response.result.error.message);
 	});
 	
-	alert ("planer = " + planner);
+	alert ("planer = " + planner[0]);
  }
 </script>
 
