@@ -73,39 +73,16 @@ table tr.header, table tr:hover {
   var maxPerHour = [];
   var startRow = [];
       startRow [0] = 0;
-      
-  var planner = 
-  [{day:"א",hour:"1",room:"202",shem:"איתי" ,course:"חשבון"},
+  var planner [];       // Main Table we Manipulate 
   
-  {day:"א",hour:"1",room:"כיתת מוזיקה",shem:"שחר" ,course:"מוזיקה"},
-   {day:"א",hour:"2",room:"102",shem:"טובי" ,course:"אנגלית"},
-   {day:"א",hour:"2",room:"108",shem:"מיכל" ,course:"עיברית"},
-   {day:"א",hour:"2",room:"188",shem:"אלון" ,course:"חונכות"},
-   
-   {day:"ב",hour:"1",room:"101",shem:"more 2 " ,course:"וועדות"},
-   {day:"ב",hour:"1",room:"111",shem:"שי" ,course:"נגרות"},
-   
-   {day:"ב",hour:"1",room:"888",shem:"גל" ,course:"חלל"},
-   {day:"ב",hour:"2",room:"221",shem:"רינה" ,course:"מחול"},
-   {day:"ג",hour:"1",room:"222",shem:"תלמיד" ,course:"ספרדית"},
-   {day:"ג",hour:"2",room:"מגרש ספורט",shem:"מורה לספורט" ,course:"דרמה"},
-   {day:"ד",hour:"1",room:"2244",shem:"אלון " ,course:"חונכות"},
-   {day:"ה",hour:"1",room:"2621",shem:"שי" ,course:"מרכז תיקונים"},
-   {day:"ו",hour:"1",room:"111",shem:"איילן " ,course:"חשבון"},
-   {day:"ו",hour:"2",room:"מגרש ספורט",shem:"מורה לספורט " ,course:"ספורט"},
-   {day:"ו",hour:"4",room:"221",shem:"טובי" ,course:"אנגלית"}
-   
-  ];
-  
-function myFunction() {
+function manageResults()
+{
 
-
-  
    rearrangeTab(planner);
- //  displayvalues(planner);
    createTable(tableData);
   
 }
+
 function displayvalues(v) {
    
    var str ="";
@@ -114,11 +91,11 @@ function displayvalues(v) {
    
    for (var i = 0; i < len; i++)
    {
-      str = str +  v[i].day + " " + v[i].hour +" "  + v[i].room +  "<br>" ;
+      str = str +  v[0]+ " " + v[1]+" "  + v[2] +  "<br>" ;
    
   }
   
- // alert (str);
+   alert (str);
   document.getElementById("demo").innerHTML = str;
 }
 function rearrangeTab(v) {
@@ -537,12 +514,16 @@ function listMajors()
 		range : 'Sheet1!A2:E',
 	}).then(function(response) {
 		var range = response.result;
+        planner = response.result;
+        displayvalues(planner);
+         
 		if (range.values.length > 0) {
 			appendPre('Name, Major:');
 			for (i = 0; i < range.values.length; i++) {
 				var row = range.values[i];
 				// Print columns A and E, which correspond to indices 0 and 4.
 				appendPre(row[0] + ', ' + row[4]);
+                
 			}
 		} else {
 			appendPre('No data found.');
