@@ -91,7 +91,7 @@ table tr.header, table tr:hover {
    
   ];
   */
-function myFunction() {
+function handleResults() {
   
    rearrangeTab(planner);
  //  displayvalues(planner);
@@ -127,7 +127,7 @@ function rearrangeTab(v) {
    
    {
    
-   switch (v[i].day) {
+   switch (v[i].[0]) {
  case "א":
     day = 1;
     break;
@@ -149,9 +149,9 @@ function rearrangeTab(v) {
   case "ש":
     day = 7;
     }
-      str = str + day + " " + v[i].hour +" "  + v[i].room +  "<br>" ;
-      HoursPerWeek [i] = v[i].hour;
-      v[i].day = day;
+      str = str + day + " " + v[1] +" "  + v[i][3] +  "<br>" ;
+      HoursPerWeek [i] = v[i].[1];
+      v[i].[0] = day;
    
   }
   
@@ -174,8 +174,8 @@ function rearrangeTab(v) {
     for (var i = 0; i < len; i++)
       {
   
-         var row = v[i].hour;
-         var col = v[i].day;
+         var row = v[i].[1];
+         var col = v[i].[0];
          daysInx [row][col] ++; 
          
    //   alert("row:" + row + "col:" + col + daysInx [row][col]);
@@ -245,7 +245,7 @@ function rearrangeTab(v) {
     for (var i = 0; i < len; i++)
       {
   
-          var row = startRow[v[i].hour];
+          var row = startRow[v[i].[1]];
            
          // change order to set days from right to left(FRIDAY FIRST SUNDAY LAST)
          var col = 6 - v[i].day  ;
@@ -422,9 +422,9 @@ function Create2DArray(rows,columns) {
   
     var str =  
         'פרטי השיעור\n\n' 
-    +  " שם מורה " + " : " +  planner[inx].shem +  "\n\n" 
-    +   " תוכן השיעור " + " : " + planner[inx].course +    "\n\n"
-    +  " כיתה " +  " : "  + planner[inx].room  ;
+    +  " שם מורה " + " : " +  planner[inx].[4] +  "\n\n" 
+    +   " תוכן השיעור " + " : " + planner[inx].[2] +    "\n\n"
+    +  " כיתה " +  " : "  + planner[inx].[3]  ;
    
     alert ( str);
    
@@ -532,21 +532,8 @@ function listMajors()
 			for (i = 0; i <range.values.length; i++) {
 				var row = range.values[i];
 				planner[i]= row 
-			/*	planner[i][1] = row[1];
-				planner[i][2] = row[2];
-				planner[i][3] = row[3];
-				planner[i][4] = row[4];
-				planner[i][5] = row[5];
-				planner[i][6] = row[6];
-				planner[i][7] = row[7];
-				planner[i][8] = row[8];
-				planner[i][9] = row[9];
-				planner[i][10] = row[10];
-				
-			*/	
-				
 				// Print columns A and E, which correspond to indices 0 and 4.
-				appendPre(row[0] + ', ' + row[1] +', ' + row[2] + ', ' + row[3] +', ' + planner[i][4] + ', ' +  planner[i][9]);
+				//appendPre(row[0] + ', ' + row[1] +', ' + row[2] + ', ' + row[3] +', ' + planner[i][4] + ', ' +  planner[i][9]);
 				
 			}
 		} else {
@@ -556,6 +543,7 @@ function listMajors()
 		appendPre('Error: ' + response.result.error.message);
 	});
 	
+	handleResults();
 	//alert ("planer 01 = " + planner[0]);
 	//displayvalues(planner);
  }
