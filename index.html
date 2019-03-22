@@ -508,7 +508,8 @@ function initClient()
 	 * @param {string} message Text to be placed in pre element.
 	 */
 	function appendPre(message) {
-		alert ( "row= " + planner[1][2] + " , " +  planner.length);
+	//	alert ( "row= " + planner[1][2] + " , " +  planner.length);
+		alert ("row");
 		var pre = document.getElementById('content');
 		var textContent = document.createTextNode(message + '\n');
 		pre.appendChild(textContent);
@@ -531,7 +532,7 @@ function listMajors()
 		if (range.values.length > 0) {
 			appendPre('Name, Major:');
 			alert("value lenght = " + range.values.length);
-			 planner  = Create2DArray(range.values.length,11); 
+			var planner  = Create2DArray(range.values.length,11); 
 			
 			for (i = 0; i <range.values.length; i++) {
 				var row = range.values[i];
