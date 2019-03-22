@@ -545,10 +545,10 @@ function listMajors()
 				planner[i][9] = row[9];
 				planner[i][10] = row[10];
 				
-			 	
+			 	'
 				
 				// Print columns A and E, which correspond to indices 0 and 4.
-				appendPre(row[0] + ', ' + row[1] +', ' + row[2] + ', ' + row[3] +', ' + planner[i][4] + ', ' +  planner[i][9]);
+				appendPre(row[0] + ', ' + row[1] +', ' + row[2] + ', ' + row[3] +', ' + planner[i][4] + ', ' +  planner[i][9] + 'len:' + planner.length);
 				
 			}
 		} else {
@@ -560,7 +560,7 @@ function listMajors()
 	
 	alert ("here..............");
 	       
-	 alert ("planer 01 = " + planner[0][1] );
+	 alert ('planer 01 = ' + planner[0][1] );
 	//var len = planner.length;
      //	alert ("lengt of planner is : " + len);
 	 var len =  planner[0].length;
