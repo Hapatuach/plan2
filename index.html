@@ -68,7 +68,7 @@ table tr.header, table tr:hover {
   var startRow = [];
       startRow [0] = 0;
       
-  var planner = [];
+  var planner = [][];
 /*	 
   [{day:"א",hour:"1",room:"202",shem:"איתי" ,course:"חשבון"},
   
@@ -560,6 +560,9 @@ function listMajors()
 	//alert ("planer 01 = " + planner[0]);
 	var len = planner.length;
 	alert ("lengt of planner is : " + len);
+	len =  planner[0].length;
+	alert ("lengt of planner is [0] : " + len);
+	
 	 displayvalues(planner);
  }
 </script>
