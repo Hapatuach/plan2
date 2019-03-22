@@ -127,7 +127,7 @@ function rearrangeTab(v) {
    
    {
    
-   switch (v[i].[0]) {
+   switch (v[i][0]) {
  case "א":
     day = 1;
     break;
@@ -149,9 +149,9 @@ function rearrangeTab(v) {
   case "ש":
     day = 7;
     }
-      str = str + day + " " + v[1] +" "  + v[i][3] +  "<br>" ;
-      HoursPerWeek [i] = v[i].[1];
-      v[i].[0] = day;
+      str = str + day + " " + v[i][1] +" "  + v[i][3] +  "<br>" ;
+      HoursPerWeek [i] = v[i][1];
+      v[i][0] = day;
    
   }
   
@@ -174,8 +174,8 @@ function rearrangeTab(v) {
     for (var i = 0; i < len; i++)
       {
   
-         var row = v[i].[1];
-         var col = v[i].[0];
+         var row = v[i][1]; // Hour
+         var col = v[i][0]; // Day
          daysInx [row][col] ++; 
          
    //   alert("row:" + row + "col:" + col + daysInx [row][col]);
@@ -245,10 +245,10 @@ function rearrangeTab(v) {
     for (var i = 0; i < len; i++)
       {
   
-          var row = startRow[v[i].[1]];
+          var row = startRow[v[i][1]];
            
          // change order to set days from right to left(FRIDAY FIRST SUNDAY LAST)
-         var col = 6 - v[i].day  ;
+         var col = 6 - v[i][0]  ;
          var finalRow = CheckNextRow(row,col,FinalMatrix,maxHours); 
          FinalMatrix [finalRow][col] = i; 
          
@@ -422,9 +422,9 @@ function Create2DArray(rows,columns) {
   
     var str =  
         'פרטי השיעור\n\n' 
-    +  " שם מורה " + " : " +  planner[inx].[4] +  "\n\n" 
-    +   " תוכן השיעור " + " : " + planner[inx].[2] +    "\n\n"
-    +  " כיתה " +  " : "  + planner[inx].[3]  ;
+    +  " שם מורה " + " : " +  planner[inx][4] +  "\n\n" 
+    +   " תוכן השיעור " + " : " + planner[inx][2] +    "\n\n"
+    +  " כיתה " +  " : "  + planner[inx][3]  ;
    
     alert ( str);
    
